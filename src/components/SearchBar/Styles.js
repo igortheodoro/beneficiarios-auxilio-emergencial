@@ -1,16 +1,25 @@
 import Styled from "styled-components";
 
-export const DivSearch = Styled.div`
+export const DivCredits = Styled.div`
+  position: absolute;
+  top: 0;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
+  height: 64px;
+  font-size: 1.3rem;
+  background-color: #F3F3FB;
+  color: #5978CE;
   width: 100%;
-  height: 100vh;
 `;
 
 export const DivBar = Styled.div`
   display: flex;
   align-items: center;
+  margin: 0 auto;
+  position: inherit;
+  top: 45%;
+  width: 400px;
   padding: 8px;
   border-radius: 30px;
   background-color: #F1F1F8;

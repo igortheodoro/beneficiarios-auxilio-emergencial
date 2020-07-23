@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Input from "../components/SearchBar/Input";
-import Layout from "../components/Layout/Layout";
+import { Div } from "./Styles";
 
 // File added in gitignore
 import headers from "../api/api";
@@ -86,10 +86,10 @@ class App extends Component {
 
   render() {
     return (
-      <Layout>
+      <Div>
         <Input changed={(e) => this.changed(e)} search={this.searchCityCode} />
         <h1 style={{ textAlign: "center" }}>{this.state.beneficiaries}</h1>
-      </Layout>
+      </Div>
     );
   }
 }
