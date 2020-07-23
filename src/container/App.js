@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Input from "../components/SearchBar/Input";
-import { Div } from "./Styles";
+import { Div, Error } from "./Styles";
 
 // File added in gitignore
 import headers from "../api/api";
@@ -20,6 +20,7 @@ class App extends Component {
     beneficiaries: 0,
     cityCode: null,
     error: false,
+    errorInRequest: 0,
   };
 
   searchBeneficiariesByMonth = (setMonth, cityCode) => {
@@ -31,23 +32,29 @@ class App extends Component {
         let beneficiariesInThatMonth = res.data[0].quantidadeBeneficiados;
         let beneficiaries = this.state.beneficiaries + beneficiariesInThatMonth;
 
-        if (this.state.error) {
-          this.setState({ error: false });
-        }
-
         this.setState({
           beneficiaries,
         });
       })
       .catch((err) => {
+        // Não existem dados dos meses 06 e 07
+        // Logo, 2 erros de tipo não encontrado podem ser ignorados
+        let errorRequest = this.state.errorInRequest;
+
         this.setState({
-          error: true,
+          errorInRequest: errorRequest + 1,
         });
+
+        if (errorRequest > 2) {
+          this.setState({
+            error: true,
+          });
+        }
       });
   };
 
   requestBeneficiaries = () => {
-    const months = ["202006", "202007", "202004", "202005"];
+    const months = ["202004", "202005", "202006", "202007"];
     const cityCode = this.state.cityCode;
 
     for (var i = 0; i < months.length; i++) {
@@ -56,17 +63,29 @@ class App extends Component {
   };
 
   searchCityCode = () => {
-    const city = this.state.city;
+    const city = this.clearString(this.state.city);
     const url = `https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${city}`;
 
     axios
       .get(url)
       .then((result) => {
-        this.setState({
-          cityCode: result.data.id,
-        });
+        // Se não retornar um array vazio, fazer request
+        if (result.data.length !== 0) {
+          if (this.state.error) {
+            this.setState({ error: false });
+          }
 
-        this.requestBeneficiaries();
+          this.setState({
+            cityCode: result.data.id,
+            errorInRequest: 0,
+          });
+
+          this.requestBeneficiaries();
+        } else {
+          this.setState({
+            error: true,
+          });
+        }
       })
       .catch((error) => {
         this.setState({
@@ -74,7 +93,7 @@ class App extends Component {
         });
       });
 
-    // Change to 0 the number of beneficiaries
+    // Reset o número de beneficiados pra não acumular
     this.setState({
       beneficiaries: 0,
     });
@@ -88,10 +107,23 @@ class App extends Component {
     });
   };
 
+  clearString = (text) => {
+    const invalidChars = "áàãâéèêëìíîïóõòôùúûü";
+    const validChars = "aaaaeeeeiiiioooouuuu";
+
+    var replacedString = text.toLowerCase().replace(/ /g, "-");
+
+    for (var i = 0; i < invalidChars.length; i++) {
+      replacedString = replacedString.replace(invalidChars[i], validChars[i]);
+    }
+
+    return replacedString;
+  };
+
   render() {
     return (
       <Div>
-        {this.state.error ? <p>Houve um erro inesperado</p> : null}
+        {this.state.error ? <Error>Cidade não encontrada</Error> : null}
 
         <Input changed={(e) => this.changed(e)} search={this.searchCityCode} />
         <h1 style={{ textAlign: "center" }}>{this.state.beneficiaries}</h1>
