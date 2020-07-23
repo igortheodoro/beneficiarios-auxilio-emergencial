@@ -31,6 +31,10 @@ class App extends Component {
         let beneficiariesInThatMonth = res.data[0].quantidadeBeneficiados;
         let beneficiaries = this.state.beneficiaries + beneficiariesInThatMonth;
 
+        if (this.state.error) {
+          this.setState({ error: false });
+        }
+
         this.setState({
           beneficiaries,
         });
@@ -43,7 +47,7 @@ class App extends Component {
   };
 
   requestBeneficiaries = () => {
-    const months = ["202004", "202005", "202006", "202007"];
+    const months = ["202006", "202007", "202004", "202005"];
     const cityCode = this.state.cityCode;
 
     for (var i = 0; i < months.length; i++) {
@@ -87,6 +91,8 @@ class App extends Component {
   render() {
     return (
       <Div>
+        {this.state.error ? <p>Houve um erro inesperado</p> : null}
+
         <Input changed={(e) => this.changed(e)} search={this.searchCityCode} />
         <h1 style={{ textAlign: "center" }}>{this.state.beneficiaries}</h1>
       </Div>
