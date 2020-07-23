@@ -1,18 +1,5 @@
 import Styled from "styled-components";
 
-export const DivCredits = Styled.div`
-  position: absolute;
-  top: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 64px;
-  font-size: 1.3rem;
-  background-color: #F3F3FB;
-  color: #5978CE;
-  width: 100%;
-`;
-
 export const DivBar = Styled.div`
   display: flex;
   align-items: center;

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Input from "../components/SearchBar/Input";
-import { Div, Error } from "./Styles";
+import { Div, Error, DivResult } from "./Styles";
+import Result from "../components/ResultBox/ResultBox";
 
 // File added in gitignore
 import headers from "../api/api";
@@ -126,7 +127,14 @@ class App extends Component {
         {this.state.error ? <Error>Cidade não encontrada</Error> : null}
 
         <Input changed={(e) => this.changed(e)} search={this.searchCityCode} />
-        <h1 style={{ textAlign: "center" }}>{this.state.beneficiaries}</h1>
+
+        <DivResult show={this.state.beneficiaries > 0}>
+          <Result
+            icon="fas fa-users"
+            title="Total de beneficiados:"
+            data={this.state.beneficiaries}
+          />
+        </DivResult>
       </Div>
     );
   }
