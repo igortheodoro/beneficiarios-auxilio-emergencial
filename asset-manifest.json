@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/beneficiados-auxilio-emergencial/static/css/main.34de6062.chunk.css",
+    "main.js": "/beneficiados-auxilio-emergencial/static/js/main.729ef7c9.chunk.js",
+    "main.js.map": "/beneficiados-auxilio-emergencial/static/js/main.729ef7c9.chunk.js.map",
+    "runtime-main.js": "/beneficiados-auxilio-emergencial/static/js/runtime-main.71c4d53d.js",
+    "runtime-main.js.map": "/beneficiados-auxilio-emergencial/static/js/runtime-main.71c4d53d.js.map",
+    "static/js/2.98f7d3be.chunk.js": "/beneficiados-auxilio-emergencial/static/js/2.98f7d3be.chunk.js",
+    "static/js/2.98f7d3be.chunk.js.map": "/beneficiados-auxilio-emergencial/static/js/2.98f7d3be.chunk.js.map",
+    "index.html": "/beneficiados-auxilio-emergencial/index.html",
+    "precache-manifest.c5be41a0bd3bfafec231ed94421bf41e.js": "/beneficiados-auxilio-emergencial/precache-manifest.c5be41a0bd3bfafec231ed94421bf41e.js",
+    "service-worker.js": "/beneficiados-auxilio-emergencial/service-worker.js",
+    "static/css/main.34de6062.chunk.css.map": "/beneficiados-auxilio-emergencial/static/css/main.34de6062.chunk.css.map",
+    "static/js/2.98f7d3be.chunk.js.LICENSE.txt": "/beneficiados-auxilio-emergencial/static/js/2.98f7d3be.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.71c4d53d.js",
+    "static/js/2.98f7d3be.chunk.js",
+    "static/css/main.34de6062.chunk.css",
+    "static/js/main.729ef7c9.chunk.js"
+  ]
+}
