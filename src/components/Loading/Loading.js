@@ -11,7 +11,7 @@ const loading = (props) => {
 
   return (
     <Loading show={props.show}>
-      <i class="fas fa-spinner"></i>
+      <i className="fas fa-spinner"></i>
       <p>{text[Math.floor(Math.random() * text.length)]}</p>
     </Loading>
   );
