@@ -15,14 +15,14 @@ export const Error = Styled.h1`
 `;
 
 export const DivResult = Styled.div`
-  margin-top: 16px;
+  position: absolute;
+  top: 55vh;
+  margin-top: 8px;
   display: ${(props) => (props.show ? "flex" : "none")};
-  flex-direction: row;
 
   @media(max-width: 680px){
-    position: absolute;
-    top: 70vh;
     flex-direction: column;
+    margin-top: 32px;
     width: 90%;
   }
 `;

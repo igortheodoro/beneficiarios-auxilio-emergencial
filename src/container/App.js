@@ -3,6 +3,7 @@ import axios from "axios";
 import Input from "../components/SearchBar/Input";
 import { Div, Error, DivResult } from "./Styles";
 import Result from "../components/ResultBox/ResultBox";
+import Load from "../components/Loading/Loading";
 
 // File added in gitignore
 import headers from "../api/api";
@@ -18,23 +19,31 @@ import headers from "../api/api";
 class App extends Component {
   state = {
     city: null,
-    beneficiaries: 0,
+    benefited: 0,
+    reais: 0,
     cityCode: null,
     error: false,
     errorInRequest: 0,
   };
 
-  searchBeneficiariesByMonth = (setMonth, cityCode) => {
+  searchBenefitedByMonth = (setMonth, cityCode) => {
     const url = `https://cors-anywhere.herokuapp.com/http://www.portaltransparencia.gov.br/api-de-dados/auxilio-emergencial-por-municipio?mesAno=${setMonth}&codigoIbge=${cityCode}&pagina=1`;
 
     axios
       .get(url, { headers })
       .then((res) => {
-        let beneficiariesInThatMonth = res.data[0].quantidadeBeneficiados;
-        let beneficiaries = this.state.beneficiaries + beneficiariesInThatMonth;
+        let benefitedInThatMonth = res.data[0].quantidadeBeneficiados;
+        let benefited = this.state.benefited + benefitedInThatMonth;
+
+        let reaisInThatMonth = res.data[0].valor;
+        let reais = this.state.reais + reaisInThatMonth;
+
+        console.log("Reais", res.data[0].valor);
+        console.log("Beneficiados", res.data[0].quantidadeBeneficiados);
 
         this.setState({
-          beneficiaries,
+          benefited,
+          reais,
         });
       })
       .catch((err) => {
@@ -54,50 +63,55 @@ class App extends Component {
       });
   };
 
-  requestBeneficiaries = () => {
+  requestBenefited = () => {
     const months = ["202004", "202005", "202006", "202007"];
     const cityCode = this.state.cityCode;
 
     for (var i = 0; i < months.length; i++) {
-      this.searchBeneficiariesByMonth(months[i], cityCode);
+      this.searchBenefitedByMonth(months[i], cityCode);
     }
   };
 
   searchCityCode = () => {
-    const city = this.clearString(this.state.city);
-    const url = `https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${city}`;
+    let city = this.state.city;
 
-    axios
-      .get(url)
-      .then((result) => {
-        // Se não retornar um array vazio, fazer request
-        if (result.data.length !== 0) {
-          if (this.state.error) {
-            this.setState({ error: false });
+    if (city !== null) {
+      city = this.clearString(city);
+      const url = `https://servicodados.ibge.gov.br/api/v1/localidades/municipios/${city}`;
+
+      axios
+        .get(url)
+        .then((result) => {
+          // Se não retornar um array vazio, fazer request
+          if (result.data.length !== 0) {
+            if (this.state.error) {
+              this.setState({ error: false });
+            }
+
+            this.setState({
+              cityCode: result.data.id,
+              errorInRequest: 0,
+            });
+
+            this.requestBenefited();
+          } else {
+            this.setState({
+              error: true,
+            });
           }
-
-          this.setState({
-            cityCode: result.data.id,
-            errorInRequest: 0,
-          });
-
-          this.requestBeneficiaries();
-        } else {
+        })
+        .catch((error) => {
           this.setState({
             error: true,
           });
-        }
-      })
-      .catch((error) => {
-        this.setState({
-          error: true,
         });
-      });
 
-    // Reset o número de beneficiados pra não acumular
-    this.setState({
-      beneficiaries: 0,
-    });
+      // Reset pra não acumular
+      this.setState({
+        benefited: 0,
+        reais: 0,
+      });
+    }
   };
 
   changed = (e) => {
@@ -121,6 +135,8 @@ class App extends Component {
     return replacedString;
   };
 
+  loading = null;
+
   render() {
     return (
       <Div>
@@ -128,11 +144,30 @@ class App extends Component {
 
         <Input changed={(e) => this.changed(e)} search={this.searchCityCode} />
 
-        <DivResult show={this.state.beneficiaries > 0}>
+        <Load
+          show={this.state.benefited === 0 && this.state.cityCode !== null}
+        />
+
+        <DivResult show={this.state.benefited > 0}>
           <Result
             icon="fas fa-users"
             title="Total de beneficiados:"
-            data={this.state.beneficiaries}
+            data={this.state.benefited}
+          />
+
+          <Result
+            icon="fas fa-coins"
+            title="Reais distribuídos:"
+            data={this.state.reais.toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+          />
+
+          <Result
+            icon="fas fa-venus"
+            title="Chefes de família:"
+            data={(this.state.reais - this.state.benefited * 600) / 600}
           />
         </DivResult>
       </Div>

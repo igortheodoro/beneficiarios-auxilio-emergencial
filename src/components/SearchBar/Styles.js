@@ -3,10 +3,6 @@ import Styled from "styled-components";
 export const DivBar = Styled.div`
   display: flex;
   align-items: center;
-  margin: 0 auto;
-  position: inherit;
-  top: 45%;
-  width: 400px;
   padding: 8px;
   border-radius: 30px;
   background-color: #F1F1F8;
