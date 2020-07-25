@@ -32,6 +32,7 @@ export const Input = Styled.input`
 
   &::placeholder{
     color: #BCBCC8;
+    font-size: 1rem;
   }
 `;
 
