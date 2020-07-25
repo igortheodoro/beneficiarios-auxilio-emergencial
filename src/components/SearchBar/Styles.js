@@ -51,3 +51,16 @@ export const Button = Styled.button`
     cursor: pointer;
   }
 `;
+
+export const DivInfo = Styled.div`
+  display: flex;
+  align-items: center;
+  padding: 2px;
+  font-size: 0.8rem;
+  color: #898991;
+
+  .fa-info-circle{
+    margin-right: 4px;
+    font-size: 1rem;
+  }
+`;
