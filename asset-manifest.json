@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/beneficiados-auxilio-emergencial/static/css/main.34de6062.chunk.css",
-    "main.js": "/beneficiados-auxilio-emergencial/static/js/main.5c4ee41f.chunk.js",
-    "main.js.map": "/beneficiados-auxilio-emergencial/static/js/main.5c4ee41f.chunk.js.map",
+    "main.js": "/beneficiados-auxilio-emergencial/static/js/main.b1e78b33.chunk.js",
+    "main.js.map": "/beneficiados-auxilio-emergencial/static/js/main.b1e78b33.chunk.js.map",
     "runtime-main.js": "/beneficiados-auxilio-emergencial/static/js/runtime-main.71c4d53d.js",
     "runtime-main.js.map": "/beneficiados-auxilio-emergencial/static/js/runtime-main.71c4d53d.js.map",
     "static/js/2.98f7d3be.chunk.js": "/beneficiados-auxilio-emergencial/static/js/2.98f7d3be.chunk.js",
     "static/js/2.98f7d3be.chunk.js.map": "/beneficiados-auxilio-emergencial/static/js/2.98f7d3be.chunk.js.map",
     "index.html": "/beneficiados-auxilio-emergencial/index.html",
-    "precache-manifest.5e6d99f47cfe08a6707b7599536f92c8.js": "/beneficiados-auxilio-emergencial/precache-manifest.5e6d99f47cfe08a6707b7599536f92c8.js",
+    "precache-manifest.ee7878e6106b481bc2a66a2f93c46a25.js": "/beneficiados-auxilio-emergencial/precache-manifest.ee7878e6106b481bc2a66a2f93c46a25.js",
     "service-worker.js": "/beneficiados-auxilio-emergencial/service-worker.js",
     "static/css/main.34de6062.chunk.css.map": "/beneficiados-auxilio-emergencial/static/css/main.34de6062.chunk.css.map",
     "static/js/2.98f7d3be.chunk.js.LICENSE.txt": "/beneficiados-auxilio-emergencial/static/js/2.98f7d3be.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.71c4d53d.js",
     "static/js/2.98f7d3be.chunk.js",
     "static/css/main.34de6062.chunk.css",
-    "static/js/main.5c4ee41f.chunk.js"
+    "static/js/main.b1e78b33.chunk.js"
   ]
 }

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/beneficiados-auxilio-emergencial/precache-manifest.5e6d99f47cfe08a6707b7599536f92c8.js"
+  "/beneficiados-auxilio-emergencial/precache-manifest.ee7878e6106b481bc2a66a2f93c46a25.js"
 );
 
 self.addEventListener('message', (event) => {
