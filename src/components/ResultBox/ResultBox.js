@@ -7,7 +7,10 @@ const result = (props) => (
       <i className={`${props.icon}`}></i>
     </RoundedDiv>
     <p>{props.title}</p>
-    <p>{props.data}</p>
+    <p>Abril: {props.abril}</p>
+    <p>Maio: {props.maio}</p>
+    <p>Junho: {props.junho}</p>
+    <p>Julho: {props.julho}</p>
   </DivTitle>
 );
 

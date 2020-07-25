@@ -8,35 +8,29 @@ import Load from "../components/Loading/Loading";
 // File added in gitignore
 import headers from "../api/api";
 
-// https://servicodados.ibge.gov.br/api/v1/localidades/municipios/{NomeCidade}
-// http://www.portaltransparencia.gov.br/api-de-dados/auxilio-emergencial-por-municipio?mesAno={202006}&codigoIbge={3132206}&pagina=1
-
-//Documentação
-//http://www.portaltransparencia.gov.br/swagger-ui.html#!/Aux237lio32emergencial/auxilioEmergencialPorMunicipioUsingGET
-
-//São Paulo === sao-paulo
-
 class App extends Component {
   state = {
     city: null,
-    benefited: 0,
-    reais: 0,
+    benefited: [0, 0, 0, 0],
+    reais: [0, 0, 0, 0],
     cityCode: null,
     error: false,
     errorInRequest: 0,
   };
 
-  searchBenefitedByMonth = (setMonth, cityCode) => {
+  searchBenefitedByMonth = (setMonth, cityCode, month) => {
     const url = `https://cors-anywhere.herokuapp.com/http://www.portaltransparencia.gov.br/api-de-dados/auxilio-emergencial-por-municipio?mesAno=${setMonth}&codigoIbge=${cityCode}&pagina=1`;
 
     axios
       .get(url, { headers })
       .then((res) => {
         let benefitedInThatMonth = res.data[0].quantidadeBeneficiados;
-        let benefited = this.state.benefited + benefitedInThatMonth;
+        let benefited = this.state.benefited;
+        benefited[month] = benefitedInThatMonth;
 
         let reaisInThatMonth = res.data[0].valor;
-        let reais = this.state.reais + reaisInThatMonth;
+        let reais = this.state.reais;
+        reais[month] = reaisInThatMonth;
 
         this.setState({
           benefited,
@@ -65,7 +59,7 @@ class App extends Component {
     const cityCode = this.state.cityCode;
 
     for (var i = 0; i < months.length; i++) {
-      this.searchBenefitedByMonth(months[i], cityCode);
+      this.searchBenefitedByMonth(months[i], cityCode, i);
     }
   };
 
@@ -105,8 +99,8 @@ class App extends Component {
 
       // Reset pra não acumular
       this.setState({
-        benefited: 0,
-        reais: 0,
+        benefited: [0, 0, 0, 0],
+        reais: [0, 0, 0, 0],
       });
     }
   };
@@ -136,7 +130,7 @@ class App extends Component {
 
   render() {
     return (
-      <Div centralized={this.state.benefited === 0}>
+      <Div centralized={this.state.benefited[0] === 0}>
         <Img
           src={require("../assets/undraw-search.svg")}
           alt="Illustration search box"
@@ -148,23 +142,38 @@ class App extends Component {
 
         <Load
           show={
-            this.state.benefited === 0 &&
+            this.state.benefited[0] === 0 &&
             this.state.cityCode !== null &&
             this.state.error === false
           }
         />
 
-        <DivResult show={this.state.benefited > 0}>
+        <DivResult show={this.state.benefited[0] > 0}>
           <Result
             icon="fas fa-users"
             title="Total de beneficiados:"
-            data={this.state.benefited}
+            abril={this.state.benefited[0]}
+            maio={this.state.benefited[1]}
+            junho={this.state.benefited[2]}
+            julho={this.state.benefited[3]}
           />
 
           <Result
             icon="fas fa-coins"
             title="Reais distribuídos:"
-            data={this.state.reais.toLocaleString("pt-br", {
+            abril={this.state.reais[0].toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+            maio={this.state.reais[1].toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+            junho={this.state.reais[2].toLocaleString("pt-br", {
+              style: "currency",
+              currency: "BRL",
+            })}
+            julho={this.state.reais[3].toLocaleString("pt-br", {
               style: "currency",
               currency: "BRL",
             })}
@@ -173,7 +182,10 @@ class App extends Component {
           <Result
             icon="fas fa-venus"
             title="Chefes de família:"
-            data={(this.state.reais - this.state.benefited * 600) / 600}
+            abril={(this.state.reais[0] - this.state.benefited[0] * 600) / 600}
+            maio={(this.state.reais[1] - this.state.benefited[1] * 600) / 600}
+            junho={(this.state.reais[2] - this.state.benefited[2] * 600) / 600}
+            julho={(this.state.reais[3] - this.state.benefited[3] * 600) / 600}
           />
         </DivResult>
       </Div>
