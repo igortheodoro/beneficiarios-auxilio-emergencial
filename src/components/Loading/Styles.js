@@ -3,8 +3,8 @@ import Styled from "styled-components";
 export const Loading = Styled.div`
   position: absolute;
   background-color: rgba(0,0,0,0.5);
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  height: 100vh;
   display: ${(props) => (props.show ? "flex" : "none")};
   justify-content: center;
   align-items: center;

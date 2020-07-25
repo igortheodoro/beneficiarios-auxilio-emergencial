@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Input from "../components/SearchBar/Input";
-import { Div, Error, DivResult } from "./Styles";
+import { Div, Error, DivResult, Img } from "./Styles";
 import Result from "../components/ResultBox/ResultBox";
 import Load from "../components/Loading/Loading";
 
@@ -37,9 +37,6 @@ class App extends Component {
 
         let reaisInThatMonth = res.data[0].valor;
         let reais = this.state.reais + reaisInThatMonth;
-
-        console.log("Reais", res.data[0].valor);
-        console.log("Beneficiados", res.data[0].quantidadeBeneficiados);
 
         this.setState({
           benefited,
@@ -123,8 +120,8 @@ class App extends Component {
   };
 
   clearString = (text) => {
-    const invalidChars = "áàãâéèêëìíîïóõòôùúûü";
-    const validChars = "aaaaeeeeiiiioooouuuu";
+    const invalidChars = "áàãâéèêëìíîïóõòôùúûüç";
+    const validChars = "aaaaeeeeiiiioooouuuuc";
 
     var replacedString = text.toLowerCase().replace(/ /g, "-");
 
@@ -139,13 +136,22 @@ class App extends Component {
 
   render() {
     return (
-      <Div>
+      <Div centralized={this.state.benefited === 0}>
+        <Img
+          src={require("../assets/undraw-search.svg")}
+          alt="Illustration search box"
+        />
+
         {this.state.error ? <Error>Cidade não encontrada</Error> : null}
 
         <Input changed={(e) => this.changed(e)} search={this.searchCityCode} />
 
         <Load
-          show={this.state.benefited === 0 && this.state.cityCode !== null}
+          show={
+            this.state.benefited === 0 &&
+            this.state.cityCode !== null &&
+            this.state.error === false
+          }
         />
 
         <DivResult show={this.state.benefited > 0}>
