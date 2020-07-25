@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "2ef7514237d857abcd17657f817f4362",
+    "revision": "2f7b3fd325aa686bb060c44ddeb1313b",
     "url": "/beneficiados-auxilio-emergencial/index.html"
   },
   {
-    "revision": "5615a9a721c6269571cb",
+    "revision": "064717fee97248e9a363",
     "url": "/beneficiados-auxilio-emergencial/static/css/main.34de6062.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/beneficiados-auxilio-emergencial/static/js/2.98f7d3be.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "5615a9a721c6269571cb",
-    "url": "/beneficiados-auxilio-emergencial/static/js/main.b1e78b33.chunk.js"
+    "revision": "064717fee97248e9a363",
+    "url": "/beneficiados-auxilio-emergencial/static/js/main.a5562155.chunk.js"
   },
   {
     "revision": "cc192ef6bb6d94b02ca9",
