@@ -10,10 +10,11 @@
 
 Nesse projeto foram usando alguns pacotes como: React.js, Axios e Styled-Components.
 
-Por isso, para executar apenas instalar as dependências, usando o seguinte comando no terminal: 
+Por isso, para executar é necessário instalar as dependências usando o seguinte comando no terminal: 
 `npm install`
 
-Pronto! Agora é só iniciar o projeto com:
-`npm start`
+Para rodar o projeto na sua máquina, digite: `npm start`
+
+
 
 * 🗝️ Link para acessar: https://igortheodoro.github.io/beneficiados-auxilio-emergencial/
